@@ -1,0 +1,5 @@
+#!/bin/bash
+while true; do
+sleep 10
+gst-launch-1.0 -e videotestsrc is-live=true ! video/x-raw,width=1024,height=768,framerate=60/1 ! videoconvert ! clockoverlay time-format="%Y-%m-%d %H:%M:%S %Z" ! x264enc tune=zerolatency ! flvmux streamable=true name=mux  !  rtmpsink location='rtmp://nginx/live/test live=true' audiotestsrc is-live=true wave=ticks ! voaacenc ! mux.
+done
